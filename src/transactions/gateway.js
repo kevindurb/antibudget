@@ -8,6 +8,7 @@ module.exports = {
   },
   getTransactions() {
     return db.select()
-      .from('transactions');
+      .from('transactions')
+      .orderBy('date', 'desc');
   }
 };
