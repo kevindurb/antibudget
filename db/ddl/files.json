@@ -1,4 +1,5 @@
 [
+  "init.sql",
   "killAll.sql",
   "tables/categories.sql",
   "tables/transactions.sql"

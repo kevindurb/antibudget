@@ -2,9 +2,14 @@ const db = require('../db');
 
 module.exports = {
   createTransactions(transactions) {
-    return db('transactions')
+    const sql = db('transactions')
       .insert(transactions)
-      .returning('*');
+      .toString();
+    return db.raw(`
+      ${sql}
+      ON CONFLICT DO NOTHING
+      RETURNING *
+    `).then(result => result.rows);
   },
   getTransactions() {
     return db.select()
