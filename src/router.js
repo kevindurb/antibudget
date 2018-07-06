@@ -6,6 +6,7 @@ const {
 } = require('./globalHandlers');
 
 const transactionsRoutes = require('./transactions/routes');
+const categoriesRoutes = require('./categories/routes');
 const statusRoutes = require('./status/routes');
 const localeRoutes = require('./locale/routes');
 
@@ -14,6 +15,7 @@ const router = Router();
 router.get('/', statusHandler);
 
 router.use(transactionsRoutes);
+router.use(categoriesRoutes);
 router.use(statusRoutes);
 router.use(localeRoutes);
 
