@@ -12,7 +12,7 @@ module.exports = {
           .from(parentEntity)
           .where({ id: parentId });
 
-        if (!parent) {
+        if (!parent.length) {
           throw new errors.NotFound('Parent Entity not found');
         }
 
@@ -60,5 +60,24 @@ module.exports = {
       }
       return db.select()
         .from(entityName);
+    },
+  update: (entityName) =>
+    async (req, res) => {
+      const id = req.params.id;
+      const entity = await db
+        .select()
+        .from(entityName)
+        .where({ id })
+        .then(x => x[0]);
+
+      if (!entity) {
+        throw new errors.NotFound('Entity not found');
+      }
+
+      return db(entityName)
+        .update(req.body)
+        .where({ id })
+        .returning('*')
+        .then(x => x[0]);
     },
 };

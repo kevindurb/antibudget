@@ -19,4 +19,9 @@ router.get(
   promisify(rest.read('transactions')),
 );
 
+router.put(
+  '/transactions/:id',
+  promisify(rest.update('transactions')),
+);
+
 module.exports = router;
