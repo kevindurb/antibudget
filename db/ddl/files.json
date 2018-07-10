@@ -1,6 +1,9 @@
 [
-  "init.sql",
-  "killAll.sql",
-  "tables/categories.sql",
-  "tables/transactions.sql"
+  "./init.sql",
+  "./killAll.sql",
+  "./tables/users.sql",
+  "./tables/accounts.sql",
+  "./tables/categories.sql",
+  "./tables/transactions.sql",
+  "./tables/categoryTransfers.sql"
 ]

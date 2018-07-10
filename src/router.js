@@ -1,25 +1,12 @@
 const { Router } = require('express');
-const {
-  errorHandler,
-  routeNotFoundHandler,
-  statusHandler,
-} = require('./globalHandlers');
-
-const transactionsRoutes = require('./transactions/routes');
-const categoriesRoutes = require('./categories/routes');
-const statusRoutes = require('./status/routes');
-const localeRoutes = require('./locale/routes');
 
 const router = Router();
 
-router.get('/', statusHandler);
-
-router.use(transactionsRoutes);
-router.use(categoriesRoutes);
-router.use(statusRoutes);
-router.use(localeRoutes);
-
-router.all('*', routeNotFoundHandler);
-router.use(errorHandler);
+router.use(require('./users/routes'));
+router.use(require('./accounts/routes'));
+router.use(require('./transactions/routes'));
+router.use(require('./categories/routes'));
+router.use(require('./status/routes'));
+router.use(require('./locale/routes'));
 
 module.exports = router;

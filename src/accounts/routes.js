@@ -5,18 +5,18 @@ const rest = require('../utils/rest');
 const router = Router();
 
 router.post(
-  '/users/:userId/categories',
-  promisify(rest.create('categories', 'users', 'userId')),
+  '/users/:userId/accounts',
+  promisify(rest.create('accounts', 'users', 'userId')),
 );
 
 router.get(
-  '/users/:userId/categories',
-  promisify(rest.read('categories', 'userId')),
+  '/users/:userId/accounts',
+  promisify(rest.read('accounts', 'userId')),
 );
 
 router.get(
-  '/categories/:id',
-  promisify(rest.read('categories')),
+  '/accounts/:id',
+  promisify(rest.read('accounts')),
 );
 
 module.exports = router;

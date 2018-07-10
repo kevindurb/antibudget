@@ -5,17 +5,17 @@ const rest = require('../utils/rest');
 const router = Router();
 
 router.post(
-  '/accounts/:accountId/transactions',
-  promisify(rest.create('transactions', 'accounts', 'accountId')),
+  '/users',
+  promisify(rest.create('users')),
 );
 
 router.get(
-  '/accounts/:accountId/transactions',
-  promisify(rest.read('transactions', 'accountId')),
+  '/users',
+  promisify(rest.read('users')),
 );
 
 router.get(
-  '/transactions/:id',
+  '/users/:id',
   promisify(rest.read('transactions')),
 );
 
