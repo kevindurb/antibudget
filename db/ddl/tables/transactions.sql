@@ -4,6 +4,7 @@ CREATE TABLE transactions (
   , description CITEXT NOT NULL
   , category_id UUID DEFAULT NULL REFERENCES categories(id)
   , account_id UUID NOT NULL REFERENCES accounts(id)
+  , user_id UUID NOT NULL REFERENCES users(id)
   , original_data JSON DEFAULT NULL
   , date TIMESTAMP WITH TIME ZONE NOT NULL
 

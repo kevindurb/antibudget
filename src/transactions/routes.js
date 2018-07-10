@@ -6,12 +6,17 @@ const router = Router();
 
 router.post(
   '/accounts/:accountId/transactions',
-  promisify(rest.create('transactions', 'accounts', 'accountId')),
+  promisify(rest.create('transactions', 'accounts', 'accountId', ['userId'])),
 );
 
 router.get(
   '/accounts/:accountId/transactions',
   promisify(rest.read('transactions', 'accountId')),
+);
+
+router.get(
+  '/users/:userId/transactions',
+  promisify(rest.read('transactions', 'userId')),
 );
 
 router.get(

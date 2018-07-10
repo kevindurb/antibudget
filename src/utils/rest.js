@@ -1,8 +1,9 @@
+const R = require('ramda');
 const db = require('../db');
 const errors = require('./errors');
 
 module.exports = {
-  create: (entityName, parentEntity, parentIdParam) =>
+  create: (entityName, parentEntity, parentIdParam, propsToPickFromParent = []) =>
     async (req, res) => {
       let data = req.body;
 
@@ -10,19 +11,25 @@ module.exports = {
         const parentId = req.params[parentIdParam];
         const parent = await db.select()
           .from(parentEntity)
-          .where({ id: parentId });
+          .where({ id: parentId })
+          .then(x => x[0]);
 
-        if (!parent.length) {
+        if (!parent) {
           throw new errors.NotFound('Parent Entity not found');
         }
 
+        const buildData = R.compose(
+          R.set(R.lensProp(parentIdParam), parentId),
+          R.merge(R.__, R.pick(
+            propsToPickFromParent,
+            parent,
+          )),
+        );
+
         if (Array.isArray(data)) {
-          data = data.map(x => ({
-            ...x,
-            [parentIdParam]: parentId,
-          }));
+          data = data.map(buildData);
         } else {
-          data[parentIdParam] = parentId;
+          data = buildData(data);
         }
       }
 
