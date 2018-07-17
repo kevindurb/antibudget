@@ -6,9 +6,11 @@
   "author": "Kevin Durbin <kevindurb@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "db:reset": "node db/create.js",
     "start": "node index.js",
-    "start:dev": "nodemon index.js"
+    "start:dev": "nodemon index.js",
+    "db:make": "knex migrate:make",
+    "db:rollback": "knex migrate:rollback",
+    "db:migrate": "knex migrate:latest"
   },
   "dependencies": {
     "cors": "^2.8.4",
