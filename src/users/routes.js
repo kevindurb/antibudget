@@ -16,7 +16,7 @@ router.get(
 
 router.get(
   '/users/:id',
-  promisify(rest.read('transactions')),
+  promisify(rest.read('users')),
 );
 
 module.exports = router;

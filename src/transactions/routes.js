@@ -11,12 +11,12 @@ router.post(
 
 router.get(
   '/accounts/:accountId/transactions',
-  promisify(rest.read('transactions', 'accountId')),
+  promisify(rest.read('transactions', 'accounts', 'accountId')),
 );
 
 router.get(
   '/users/:userId/transactions',
-  promisify(rest.read('transactions', 'userId')),
+  promisify(rest.read('transactions', 'users', 'userId')),
 );
 
 router.get(

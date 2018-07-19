@@ -11,7 +11,7 @@ router.post(
 
 router.get(
   '/users/:userId/accounts',
-  promisify(rest.read('accounts', 'userId')),
+  promisify(rest.read('accounts', 'users', 'userId')),
 );
 
 router.get(

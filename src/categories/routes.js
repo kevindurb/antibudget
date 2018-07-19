@@ -11,7 +11,7 @@ router.post(
 
 router.get(
   '/users/:userId/categories',
-  promisify(rest.read('categories', 'userId')),
+  promisify(rest.read('categories', 'users', 'userId')),
 );
 
 router.get(

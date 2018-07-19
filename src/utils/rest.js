@@ -49,10 +49,19 @@ module.exports = {
 
       return result[0];
     },
-  read: (entityName, parentIdParam) =>
+  read: (entityName, parentEntity, parentIdParam) =>
     async (req, res) => {
-      if (parentIdParam) {
+      if (parentEntity) {
         const parentId = req.params[parentIdParam];
+        const parent = await db.select()
+          .from(parentEntity)
+          .where({ id: parentId })
+          .then(x => x[0]);
+
+        if (!parent) {
+          throw new errors.NotFound('Parent Entity not found');
+        }
+
         return db.select()
           .from(entityName)
           .where({ [parentIdParam]: parentId });
@@ -60,10 +69,16 @@ module.exports = {
 
       const id = req.params.id;
       if (id) {
-        return db.select()
+        const result = await db.select()
           .from(entityName)
           .where({ id })
           .then(x => x[0]);
+
+        if (!result) {
+          throw new errors.NotFound('Entity not found');
+        }
+
+        return result;
       }
       return db.select()
         .from(entityName);
