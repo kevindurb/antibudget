@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const promisify = require('../utils/promisify');
 const rest = require('../utils/rest');
+const getTransactions = require('./handlers/getTransactions');
 
 const router = Router();
 
@@ -16,7 +17,7 @@ router.get(
 
 router.get(
   '/users/:userId/transactions',
-  promisify(rest.read('transactions', 'users', 'userId')),
+  promisify(getTransactions),
 );
 
 router.get(

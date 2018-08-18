@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const promisify = require('../utils/promisify');
 const rest = require('../utils/rest');
+const getCategories = require('./handlers/getCategories');
 
 const router = Router();
 
@@ -11,7 +12,7 @@ router.post(
 
 router.get(
   '/users/:userId/categories',
-  promisify(rest.read('categories', 'users', 'userId')),
+  promisify(getCategories),
 );
 
 router.get(
